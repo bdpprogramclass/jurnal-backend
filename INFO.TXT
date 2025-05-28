@@ -34,3 +34,4 @@ Gunakan ID tersebut:
 curl -X DELETE http://localhost:3000/api/users/665610c7c75d3a18f601305f
 
 
+https://github.com/bdpprogramclass/jurnal-backend.git.

@@ -28,6 +28,9 @@ mongoose
   .connect(mongoURI)
   .then(() => {
     console.log("MongoDB connected");
+    app.get("/", (req, res) => {
+      res.send("Jurnal App Backend is running");
+    });
     app.listen(3000, () =>
       console.log("Server running at http://localhost:3000")
     );
