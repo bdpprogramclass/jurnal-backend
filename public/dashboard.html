@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard Siswa</title>
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Jurnal Online Prakerin</h2>
+
+      <p class="welcome">Selamat datang, <span id="usernameDisplay"></span></p>
+
+      <form id="activityForm">
+        <!-- Input kegiatan -->
+        <textarea
+          id="activityInput"
+          placeholder="Tulis kegiatan harian di sini ..."
+          required
+        ></textarea>
+        <button id="submitBtn" type="submit">Submit Kegiatan</button>
+        <p id="submitMsg"></p>
+        <button id="logoutBtn">Logout</button>
+      </form>
+
+      <h3 class="riwayatKegiatan">| Riwayat Kegiatan Harian Siswa |</h3>
+      <div class="table-container">
+        <table id="logTable">
+          <thead>
+            <tr>
+              <th>Kegiatan</th>
+              <th>Tanggal</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      const username = localStorage.getItem("username");
+      const role = localStorage.getItem("role");
+
+      if (!username || role !== "siswa") {
+        window.location.href = "/"; // redirect jika bukan siswa
+      }
+
+      document.getElementById("usernameDisplay").textContent = username;
+
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.clear();
+        window.location.href = "/";
+      });
+
+      // Cek apakah sudah submit hari ini
+      async function checkTodaySubmission() {
+        const res = await fetch(`/api/logs?username=${username}`);
+        const logs = await res.json();
+        const today = new Date().toISOString().split("T")[0];
+
+        const submittedToday = logs.some(
+          (log) => new Date(log.date).toISOString().split("T")[0] === today
+        );
+
+        if (submittedToday) {
+          document.getElementById("activityInput").disabled = true;
+          document.querySelector("button[type=submit]").disabled = true;
+          document.getElementById("submitMsg").textContent =
+            "Anda sudah mengisi kegiatan hari ini";
+        }
+
+        showLogs(logs);
+      }
+
+      // Tampilkan log
+      function showLogs(logs) {
+        const tbody = document.querySelector("#logTable tbody");
+        tbody.innerHTML = "";
+        logs.forEach((log) => {
+          const row = `<tr>
+          <td>${log.activity}</td>
+          <td>${new Date(log.date).toLocaleString()}</td>
+        </tr>`;
+          tbody.innerHTML += row;
+        });
+      }
+
+      // Submit kegiatan
+      document
+        .getElementById("activityForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const activity = document.getElementById("activityInput").value;
+          const res = await fetch("/api/activities", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, activity }),
+          });
+
+          if (res.ok) {
+            document.getElementById("submitMsg").textContent =
+              "Kegiatan berhasil disimpan!";
+            document.getElementById("activityInput").disabled = true;
+            document.querySelector("button[type=submit]").disabled = true;
+            checkTodaySubmission();
+          } else {
+            document.getElementById("submitMsg").textContent =
+              "Gagal menyimpan kegiatan.";
+          }
+        });
+
+      // Inisialisasi saat load
+      checkTodaySubmission();
+    </script>
+  </body>
+</html>

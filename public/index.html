@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login Form | Jurnal Online Prakerin</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="containerIndex">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <p>Username</p>
+        <input type="text" id="username" placeholder="" required /><br />
+        <p>Password</p>
+        <div class="input-group">
+          <input type="password" id="password" placeholder="" required />
+          <i id="togglePassword" class="fa-solid fa-eye toggle-password"></i>
+        </div>
+
+        <p id="message"></p>
+        <button type="submit">Login</button>
+      </form>
+      
+      <!-- Link Kembali ke Beranda -->
+    <div class="back-home">
+      <a href="https://link-beranda-anda.com">Kembali ke Beranda</a>
+    </div>
+  </div>
+    </div>
+    
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          const res = await fetch("/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+          });
+
+          const data = await res.json();
+
+          if (data.success) {
+            localStorage.setItem("username", username);
+            localStorage.setItem("role", data.role);
+
+            if (data.role === "admin") {
+              window.location.href = "/admin.html"; // redirect admin ke panel admin
+            } else {
+              window.location.href = "/dashboard.html"; // redirect siswa ke dashboard biasa
+            }
+          } else {
+            document.getElementById("message").innerText = data.message;
+          }
+        });
+
+      const togglePassword = document.getElementById("togglePassword");
+      const password = document.getElementById("password");
+
+      togglePassword.addEventListener("click", () => {
+        const type =
+          password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+
+        // Ganti ikon
+        togglePassword.classList.toggle("fa-eye");
+        togglePassword.classList.toggle("fa-eye-slash");
+      });
+    </script>
+  </body>
+</html>

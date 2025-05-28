@@ -1,0 +1,36 @@
+Untuk menambahkan, melihat, dan menghapus user (beserta password & role) dari database MongoDB langsung via Git Bash, kamu bisa gunakan curl untuk berinteraksi dengan server kamu (dengan asumsi server kamu sudah berjalan di localhost:3000 dan memiliki endpoint yang sesuai). Berikut adalah caranya:
+
+1. Melihat Semua User
+curl http://localhost:3000/api/users
+
+contoh respon :
+[
+  {
+    "_id": "665610c7c75d3a18f601305f",
+    "username": "siswa1",
+    "role": "siswa",
+    "password": "pass123",
+    "__v": 0
+  },
+  ...
+]
+
+
+========================================
+2. Menambahkan User Baru
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"egsa","password":"egsa","role":"siswa"}'
+
+respon jika berhasil :
+{"message": "User berhasil ditambahkan"}
+
+
+=================================
+3. Menghapus User (berdasarkan _id)
+Misalnya dari hasil GET kamu mendapatkan ID seperti ini:
+"_id": "665610c7c75d3a18f601305f"
+
+
+Gunakan ID tersebut:
+curl -X DELETE http://localhost:3000/api/users/665610c7c75d3a18f601305f
+
+

@@ -1,0 +1,77 @@
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"egsa","password":"747578","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"monitoring","password":"admin123","role":"admin"}'
+
+====================================================================
+AKUN siswa
+====================================================================
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"afira","password":"br.742296","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"salman","password":"br.776079","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"aldy","password":"br.969964","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"andhika","password":"br.122538","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"anggun","password":"br.116834","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"annisa","password":"br.671456","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"daffa","password":"br.108947","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"fahri","password":"br.11685","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"fajar","password":"br.256398","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"hafiz","password":"br.604096","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"haris","password":"br.642878","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"ilham","password":"br.663744","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"khairunnisa","password":"br.378607","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"maftuh","password":"br.989195","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"manjila","password":"br.553226","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"faiz","password":"br.804673","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"muhaefal","password":"br.272607","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"arifin","password":"br.297287","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"rizki","password":"br.508694","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"aryadi","password":"br.508147","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"azis","password":"br.801465","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"ridho","password":"br.612200","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"azzahra","password":"br.405801","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"azhar","password":"br.948455","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"nadia","password":"br.766859","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"nadiah","password":"br.123173","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"nana","password":"br.44181","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"rafly","password":"br.220755","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"retna","password":"br.929470","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"rinah","password":"br.331521","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"safitri","password":"br.999511","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"suci","password":"br.736965","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"wulan","password":"br.625447","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"fery","password":"br.579453","role":"siswa"}'
+
+curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d '{"username":"adinda","password":"br.340870","role":"siswa"}'

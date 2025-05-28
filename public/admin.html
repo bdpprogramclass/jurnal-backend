@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Panel - Log Kegiatan</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Admin Panel - Log Kegiatan</h1>
+      <br /><br />
+
+      <label for="filterUser">Filter by User:</label>
+      <select id="filterUser">
+        <option value="all">All Users</option>
+      </select>
+
+      <div class="table-container">
+        <table id="logTable">
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Kegiatan</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody id="logTableBody">
+            <!-- Data log akan dimuat di sini -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="wrapAdm">
+        <button id="downloadBtn">Download</button>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </div>
+
+    <script>
+      async function fetchUsers() {
+        try {
+          const res = await fetch("/api/users");
+          if (!res.ok) throw new Error("Failed fetch users");
+          const users = await res.json();
+          const select = document.getElementById("filterUser");
+          users.forEach((user) => {
+            const opt = document.createElement("option");
+            opt.value = user.username;
+            opt.textContent = user.username;
+            select.appendChild(opt);
+          });
+        } catch (err) {
+          alert("Gagal mengambil daftar user: " + err.message);
+        }
+      }
+
+      async function fetchLogs(username = "all") {
+        try {
+          const url =
+            username === "all" ? "/api/logs" : `/api/logs?username=${username}`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error("Failed fetch logs");
+          const logs = await res.json();
+          renderLogs(logs);
+        } catch (err) {
+          alert("Gagal mengambil data log: " + err.message);
+        }
+      }
+
+      function renderLogs(logs) {
+        const tbody = document.getElementById("logTableBody");
+        tbody.innerHTML = "";
+        logs.forEach((log) => {
+          const username = log.username || "-";
+          const activity = log.activity || "-"; // pakai activity
+          const dateStr = log.date ? new Date(log.date).toLocaleString() : "-"; // pakai date
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+      <td>${username}</td>
+      <td>${activity}</td>
+      <td>${dateStr}</td>
+    `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      document.getElementById("filterUser").addEventListener("change", (e) => {
+        fetchLogs(e.target.value);
+      });
+
+      document.getElementById("downloadBtn").addEventListener("click", () => {
+        const username = document.getElementById("filterUser").value;
+        const url =
+          username === "all"
+            ? "/api/logs/download"
+            : `/api/logs/download?username=${username}`;
+        window.open(url, "_blank");
+      });
+
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("username");
+        localStorage.removeItem("role");
+        window.location.href = "/index.html";
+      });
+
+      // Cek login dan role
+      window.onload = () => {
+        const role = localStorage.getItem("role");
+        if (role !== "admin") {
+          alert("Anda bukan admin atau belum login!");
+          window.location.href = "/index.html";
+          return;
+        }
+        fetchUsers();
+        fetchLogs();
+      };
+    </script>
+  </body>
+</html>
